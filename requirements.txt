@@ -1,3 +1,4 @@
 pylast
 tweepy
 requests
+Mastodon.py
