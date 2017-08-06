@@ -46,7 +46,7 @@ def get_image(mbid):
 
 # get the top artists for the past week
 to_time = int(time.time())
-from_time = to_time - 60 * 60 * 24 * 14
+from_time = to_time - 60 * 60 * 24 * 7 
 url = "http://ws.audioscrobbler.com/2.0/?method=user.getweeklyartistchart&user=%s&api_key=%s&from=%s&to=%s&format=json" % (lastfm_user, lastfm_api_key, from_time, to_time)
 results = requests.get(url).json()
 artists = results["weeklyartistchart"]["artist"][0:3]
