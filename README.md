@@ -1,7 +1,7 @@
 Send status updates on Twitter and Mastodon for for the top artists you've
 listened to in the past 7 days using LastFM. Here's an example tweet:
 
-<img style="border: thin solid #ccc;" src="https://i.imgur.com/v8mdziu.png">
+<img src="https://i.imgur.com/SBs0DqS.png">
 
 To run this first install lastweet:
 
