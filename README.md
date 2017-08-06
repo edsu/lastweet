@@ -1,5 +1,5 @@
-Send status updates on Twitter and Mastodon for for the top artists you've
-listened to in the past 7 days using LastFM. Here's an example tweet:
+Send status updates on Twitter and Mastodon for the top artists you've listened
+to in the past 7 days using LastFM. Here's an example tweet:
 
 <img src="https://i.imgur.com/SBs0DqS.png">
 
