@@ -7,10 +7,10 @@ To run this first install lastweet:
 
     pip install lastweet
 
-Then you'll need set a bunch of things in your environment. Since it's 
-convenient to run this from cron every week create a file that sets all the
+Then you'll need set a bunch of things in your environment. Since it's
+convenient to run this from cron every week, create a file that sets all the
 variables and then runs lastweet. If you don't want to use either Twitter or
-Mastodon then just don't use the variables related to them.
+Mastodon then just don't include the variables related to them.
 
 ```
 export LASTFM_USER="inkdroid"
