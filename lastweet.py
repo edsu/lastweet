@@ -52,9 +52,8 @@ results = requests.get(url).json()
 artists = results["weeklyartistchart"]["artist"][0:3]
 
 # create the status message
-status = "My top 3 #lastfm artists:"
 parts = ["%s (%s)" % (a["name"],  a["playcount"]) for a in artists[0:3]]
-msg = "My top 3 #lastfm artists: " + ", ".join(parts)
+msg = "My top 3 #lastfm artists this week: " + ", ".join(parts)
 
 # get artist images
 images = []
