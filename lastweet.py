@@ -27,6 +27,7 @@ twitter_access_token = e('TWITTER_ACCESS_TOKEN')
 twitter_access_token_secret = e('TWITTER_ACCESS_TOKEN_SECRET')
 lastfm_api_key = e('LASTFM_KEY')
 lastfm_user = e('LASTFM_USER')
+mastodon_url = e('MASTODON_URL')
 mastodon_client_id = e('MASTODON_CLIENT_ID')
 mastodon_client_secret = e('MASTODON_CLIENT_SECRET')
 mastodon_access_token = e('MASTODON_ACCESS_TOKEN')
@@ -54,8 +55,12 @@ results = requests.get(url).json()
 artists = results["weeklyartistchart"]["artist"][0:3]
 
 # create the status message
+lastfm_link = "https://www.last.fm/user/%s/library/artists?to=%s&from=%s" % (lastfm_user, to_time, from_time)
 parts = ["%s (%s)" % (a["name"],  a["playcount"]) for a in artists[0:3]]
-msg = "My top 3 #lastfm artists this week: " + ", ".join(parts)
+msg = "What I've been listening to this week: %s #lastfm\n\n%s" % (
+    ", ".join(parts),
+    lastfm_link
+)
 
 # get artist images
 images = []
@@ -78,6 +83,7 @@ if not debug and twitter_consumer_key:
 # twoot them
 if not debug and mastodon_access_token:
     m = mastodon.Mastodon(
+        api_base_url=mastodon_url,
         client_id=mastodon_client_id,
         client_secret=mastodon_client_secret,
         access_token=mastodon_access_token
