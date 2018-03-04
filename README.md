@@ -13,7 +13,7 @@ variables and then runs lastweet. If you don't want to use either Twitter or
 Mastodon then omit the variables related to them.
 
 ```
-export LASTFM_USER="inkdroid"
+export LASTFM_USER="CHANGEME"
 export LASTFM_KEY="CHANGEME"
 export LASTFM_SECRET="CHANGEME"
 export TWITTER_CONSUMER_KEY="CHANGEME"
