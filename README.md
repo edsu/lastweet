@@ -3,7 +3,7 @@ listened to in the past 7 days using LastFM. Here's an example tweet:
 
 <img src="https://i.imgur.com/SBs0DqS.png">
 
-To run this first install lastweet:
+To run you'll need to install lastweet:
 
     pip install lastweet
 
