@@ -68,7 +68,6 @@ msg = "What I've been listening to this week: %s #lastfm\n\n%s" % (
 # get artist images
 images = []
 for artist in artists:
-    print(artist)
     image = get_image(artist['url'])
     if image:
         images.append(image)
