@@ -14,8 +14,11 @@ import time
 import shutil
 import tweepy
 import mastodon
-import requests
 import urllib.request
+
+from requests_html import HTMLSession
+
+http = HTMLSession()
 
 debug = False
 
@@ -33,14 +36,14 @@ mastodon_client_secret = e('MASTODON_CLIENT_SECRET')
 mastodon_access_token = e('MASTODON_ACCESS_TOKEN')
 
 # will try to download an image for a given musicbrainz artist id
-def get_image(mbid):
-    url = 'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&api_key=%s&mbid=%s&format=json'
-    artist = requests.get(url % (lastfm_api_key, mbid)).json()
-    if 'error' in artist:
-        return None
-    image_url = artist['artist']['image'][3]['#text']
+def get_image(artist_url):
+    doc = http.get(artist_url)
+    image_url = doc.html.find('.header .avatar', first=True)
+    if not image_url:
+        return
+    image_url = image_url.attrs['src']
     filename = os.path.join(".", "images", os.path.basename(image_url))
-    r = requests.get(image_url, stream=True)
+    r = http.get(image_url, stream=True)
     if r.status_code == 200:
         with open(filename, "wb") as fh:
             r.raw.decode_content = True
@@ -51,7 +54,7 @@ def get_image(mbid):
 to_time = int(time.time())
 from_time = to_time - 60 * 60 * 24 * 7
 url = "http://ws.audioscrobbler.com/2.0/?method=user.getweeklyartistchart&user=%s&api_key=%s&from=%s&to=%s&format=json" % (lastfm_user, lastfm_api_key, from_time, to_time)
-results = requests.get(url).json()
+results = http.get(url).json()
 artists = results["weeklyartistchart"]["artist"][0:3]
 
 # create the status message
@@ -65,7 +68,8 @@ msg = "What I've been listening to this week: %s #lastfm\n\n%s" % (
 # get artist images
 images = []
 for artist in artists:
-    image = get_image(artist['mbid'])
+    print(artist)
+    image = get_image(artist['url'])
     if image:
         images.append(image)
 
